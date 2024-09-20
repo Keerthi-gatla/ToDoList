@@ -1,0 +1,123 @@
+[
+    {
+        "id": "http_in",
+        "type": "http in",
+        "z": "a771a959a9b98345",
+        "name": "",
+        "url": "/add-task",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 280,
+        "y": 260,
+        "wires": [
+            [
+                "function_node"
+            ]
+        ]
+    },
+    {
+        "id": "function_node",
+        "type": "function",
+        "z": "a771a959a9b98345",
+        "name": "Format Task",
+        "func": "msg.payload = {\n    task: msg.payload.task,\n    status: \"pending\",\n    created_at: new Date().toISOString()\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "cloudant_out"
+            ]
+        ]
+    },
+    {
+        "id": "cloudant_out",
+        "type": "cloudant out",
+        "z": "a771a959a9b98345",
+        "name": "",
+        "cloudant": "f2b97b4245765151",
+        "database": "mydb",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 680,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ui_form",
+        "type": "ui_form",
+        "z": "a771a959a9b98345",
+        "name": "Add Task",
+        "label": "Add Task",
+        "group": "bd0e51becd08e08a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Task",
+                "value": "task",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "description",
+                "value": "explaination",
+                "type": "text",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "task": "",
+            "explaination": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "topicType": "str",
+        "splitLayout": false,
+        "className": "",
+        "x": 260,
+        "y": 160,
+        "wires": [
+            [
+                "function_node"
+            ]
+        ]
+    },
+    {
+        "id": "f2b97b4245765151",
+        "type": "cloudant",
+        "host": "https://apikey-v2-17mdwzphwwobotbxtb112908efs2aulvk0jord1xcvmm:30506ed44671e8ef26a0a4c8a2d790cc@205fd774-c380-4ee4-829c-b9d2e9298b7d-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "cloud"
+    },
+    {
+        "id": "bd0e51becd08e08a",
+        "type": "ui_group",
+        "name": "TASK",
+        "tab": "45fb9f468ca4b089",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "45fb9f468ca4b089",
+        "type": "ui_tab",
+        "name": "TASK LIST",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
