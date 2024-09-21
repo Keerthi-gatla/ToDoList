@@ -104,6 +104,7 @@ To create IAM credentials for your Cloudant service, follow these steps:
 7. Specify the **Role** (e.g., `Manager`).
 8. Optionally, provide a **Service ID** or let IAM generate one for you.
 9. Click **Add** to generate the new service credential¹.
+   Note: Make sure that you have the credential of IAM and legal one so that you will get password
 
 ### 5. Deploy the Flow
 
